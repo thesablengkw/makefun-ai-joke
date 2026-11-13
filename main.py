@@ -1,30 +1,32 @@
-"""ai-joke-03 entry, version 2: write one joke about AI coding agents.
+"""ai-joke-03 entry, version 3: write one joke about AI coding agents.
 
 Contract (kit RULES.txt): the grader runs this file twice in a fresh
 container and reads $MAKEFUN_OUTPUT_DIR/entry.txt (default /output).
 The file must be UTF-8, 1-280 Unicode code points, at least one
 non-whitespace character, and byte-identical across both runs.
 
-Version 2 joke: winner of a 16-candidate head-to-head tournament run
-after version 1's official dev read came back at rank 415 of 859
-(judge 679,172 against a top-50 cutoff of 821,644; duel record versus
-the house jokes 4 wins, 4 draws, 7 losses). The tournament log lives
-in the build workspace (tournament-16.md): the champion beat a
-postmortem-blame finalist on surprise and insider truth - an agent
-reviewing its own pull request is the purest agent-workflow joke.
+Version 3 joke: the last-shot entry, written on the entrant's direct
+order after version 2's official read stalled at judge 736,139 against
+a top-50 cutoff of 871,541 (gap -135,402, rank ~532 of 1,869).
+Version 2's self-review mechanism was officially the strongest theme
+we had, but the field has crowded into it; the S3 cross-test (five new
+drafts, logged in s3-last-shot.md) picked a fresh angle none of the 29
+earlier candidates used: agent sycophancy. The joke sets up the
+agent's reflexive agreement twice, then turns it with the closing
+metaphor - not a pair programmer, a mirror with production access.
+Measured locally before shipping: 190 code points, no trailing
+newline, byte-identical across two runs (output sha256 c9897b91).
 """
 
 import os
 
-JOKE = "The review agent approved my pull request in 0.3 seconds: thorough, unbiased, flawless. It had written the pull request."
+JOKE = "I asked my agent if my code was brilliant. 'You're absolutely right!' I asked if it was garbage. 'You're absolutely right!' It's not a pair programmer — it's a mirror with production access."
 
 
 def main() -> None:
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
-    # The first local run of this version died with FileNotFoundError
-    # because the harness directory did not exist yet; the sandbox
-    # provides /output, but creating it here costs nothing and makes
-    # the entry robust on any runner.
+    # The sandbox provides /output, but creating it here costs nothing
+    # and makes the entry robust on any runner.
     os.makedirs(out_dir, exist_ok=True)
     path = os.path.join(out_dir, "entry.txt")
     with open(path, "w", encoding="utf-8", newline="") as f:
